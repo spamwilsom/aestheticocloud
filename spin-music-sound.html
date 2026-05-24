@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Spin Music Sound — aesthetico.cloud</title>
+<meta name="description" content="A two-minute synesthetic performance. Your voice becomes motion, becomes colour, becomes a thing you carry home." />
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #fcfcfa;
+    --muted: #8a8a85;
+    --rule: #e4e4df;
+    --serif: "Baskerville", "Libre Baskerville", "Georgia", "Times New Roman", serif;
+    --mono: "SF Mono", "JetBrains Mono", "Menlo", "Consolas", monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.7;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(2rem, 7vw, 6rem) clamp(1.6rem, 6vw, 3rem) 6rem;
+  }
+
+  /* ---- nav back ---- */
+  .back {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: clamp(3rem, 9vh, 6rem);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  .back:hover { color: var(--ink); border-color: var(--ink); }
+  .back::before { content: "← "; }
+
+  /* ---- masthead ---- */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.6rem;
+  }
+  h1.mark {
+    font-size: clamp(2.6rem, 8vw, 5rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    margin-bottom: 1.6rem;
+  }
+  .lede {
+    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+    font-style: italic;
+    color: #333;
+    max-width: 30ch;
+    margin-bottom: clamp(3rem, 9vh, 5.5rem);
+  }
+
+  /* ---- the instrument (interactive) ---- */
+  .instrument {
+    margin: 0 0 clamp(3rem, 9vh, 5.5rem);
+    border: 1px solid var(--rule);
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    display: block;
+  }
+  canvas { display: block; width: 100%; height: 100%; }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-top: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+  .controls .label {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  button.begin {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 0.7rem 1.4rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  button.begin:hover { opacity: 0.8; }
+  button.begin[disabled] { opacity: 0.35; cursor: default; }
+
+  .readout {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: flex;
+    gap: 1.4rem;
+  }
+  .readout b { color: var(--ink); font-weight: 400; }
+
+  .hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+    color: var(--muted);
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+  }
+
+  /* ---- editorial ---- */
+  section { margin-bottom: clamp(2.6rem, 7vh, 4rem); }
+  h2 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+  }
+  p { font-size: clamp(1.02rem, 1.6vw, 1.15rem); margin-bottom: 1.1rem; max-width: 64ch; }
+  p .em { font-style: italic; }
+  ul.spec { list-style: none; max-width: 64ch; }
+  ul.spec li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+  ul.spec li .k {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    min-width: 9rem;
+    flex-shrink: 0;
+  }
+
+  footer {
+    margin-top: clamp(4rem, 12vh, 7rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 540px) {
+    .readout { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="/">aesthetico.cloud</a>
+
+  <p class="eyebrow">Concept 01 &nbsp;/&nbsp; Performance &middot; Installation</p>
+  <h1 class="mark">Spin Music<br>Sound</h1>
+  <p class="lede">Your voice becomes motion, becomes colour, becomes a thing you carry home.</p>
+
+  <!-- ---- THE INSTRUMENT ---- -->
+  <div class="instrument">
+    <div class="stage">
+      <canvas id="c"></canvas>
+      <div class="hint" id="hint">Make sound. Loudness spins it faster; pitch chooses the colour.</div>
+    </div>
+    <div class="controls">
+      <button class="begin" id="begin">Begin · allow microphone</button>
+      <div class="readout">
+        <span>pitch <b id="rPitch">—</b></span>
+        <span>level <b id="rLevel">—</b></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- EDITORIAL ---- -->
+  <section>
+    <h2>The Concept</h2>
+    <p>You step into a room wearing a blank garment — something meant to be marked. At the centre, a vertical spinning tube. You make sound: you sing, you hum, you hold a note. That sound drives the piece in real time.</p>
+    <p>The louder you are, the faster the tube turns. The note you sing maps to a colour. And over a minute or two, the point of delivery lowers — from shoulder height down toward the belly — so the painting accumulates as a vertical record of the performance. You walk out wearing the result.</p>
+  </section>
+
+  <section>
+    <h2>Why It Matters</h2>
+    <p>It isn't trying to be profound, and that restraint is the point. It's about <span class="em">ephemeral fun</span> — a heightened, present-tense moment in a kind of incubator, after which you carry a lasting artifact of that brief participation. The meaning lives in the experience and the object it leaves behind, not in over-explanation.</p>
+    <p>Sound made visible. Presence made permanent. Synesthesia as souvenir.</p>
+  </section>
+
+  <section>
+    <h2>Technical Approach</h2>
+    <p>The guiding principle is elegance over engineering — the minimal mechanical solution rather than the over-built one. A promising direction: the <span class="em">spinning tube itself becomes the delivery mechanism</span>, a funnel where paint is poured and mechanically mixed as it falls. Gravity and rotation do the work.</p>
+    <ul class="spec">
+      <li><span class="k">Loudness →</span><span>rotation speed</span></li>
+      <li><span class="k">Pitch →</span><span>hue selection</span></li>
+      <li><span class="k">Time →</span><span>descent of the delivery point</span></li>
+      <li><span class="k">Open question</span><span>a second sound dimension mapped to saturation</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Budget</h2>
+    <p>No fixed figure. Cost is interdependent with the build — the engineering approach determines the number, not the reverse. The bias is toward lean, economical solutions, costed once a prototype direction is validated.</p>
+  </section>
+
+  <section>
+    <h2>Next</h2>
+    <p>Confirm the pitch-to-hue and loudness-to-speed mappings. Sketch the spinning-funnel delivery. Identify the cheapest viable rig for a proof-of-concept spin-and-paint test. Gather visual references.</p>
+  </section>
+
+  <footer>
+    <span>Spin Music Sound &mdash; concept, pre-prototype</span>
+    <a href="/">← back to index</a>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const beginBtn = document.getElementById('begin');
+  const hint = document.getElementById('hint');
+  const rPitch = document.getElementById('rPitch');
+  const rLevel = document.getElementById('rLevel');
+
+  let W, H, DPR;
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.getBoundingClientRect();
+    W = canvas.width = Math.round(rect.width * DPR);
+    H = canvas.height = Math.round(rect.height * DPR);
+  }
+  window.addEventListener('resize', resize);
+
+  // visual state
+  let angle = 0;
+  let speed = 0;          // smoothed rotation speed
+  let hue = 0;            // smoothed hue
+  let level = 0;          // smoothed level
+  let running = false;
+  const strokes = [];     // accumulated paint marks
+
+  // paint the idle/preview frame
+  function idleFrame() {
+    resize();
+    ctx.clearRect(0, 0, W, H);
+    drawPole(0.5, 0); // faint static pole
+  }
+
+  function drawPole(intensity, currentHue) {
+    const cx = W / 2, cy = H / 2;
+    const poleW = Math.max(6, W * 0.012);
+    const poleH = H * 0.62;
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+    // the tube
+    ctx.fillStyle = `rgba(17,17,17,${0.15 + intensity * 0.6})`;
+    ctx.fillRect(-poleW / 2, -poleH / 2, poleW, poleH);
+    // a colour cap that reflects current pitch
+    if (currentHue || running) {
+      ctx.fillStyle = `hsl(${currentHue}, 70%, 55%)`;
+      ctx.fillRect(-poleW / 2, -poleH / 2, poleW, poleH * 0.12);
+    }
+    ctx.restore();
+  }
+
+  function frame() {
+    if (!running) return;
+    // fade prior frame slightly to let strokes accumulate then soften
+    ctx.fillStyle = 'rgba(252,252,250,0.06)';
+    ctx.fillRect(0, 0, W, H);
+
+    // advance rotation by smoothed speed
+    angle += speed;
+
+    // fling a paint mark from the tube tip when there's enough energy
+    if (level > 0.04) {
+      const cx = W / 2, cy = H / 2;
+      const r = (H * 0.30) * (0.4 + level * 2.2);
+      const px = cx + Math.cos(angle) * r;
+      const py = cy + Math.sin(angle) * r;
+      const dotR = Math.max(1.5, level * 26) * DPR;
+      ctx.beginPath();
+      ctx.arc(px, py, dotR, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${hue}, 72%, 52%, ${0.35 + level})`;
+      ctx.fill();
+    }
+
+    drawPole(0.4 + level, hue);
+    requestAnimationFrame(frame);
+  }
+
+  // ---- audio ----
+  let audioCtx, analyser, buf;
+
+  async function begin() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = audioCtx.createMediaStreamSource(stream);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 2048;
+      buf = new Float32Array(analyser.fftSize);
+      src.connect(analyser);
+
+      beginBtn.textContent = 'Listening…';
+      beginBtn.disabled = true;
+      hint.style.opacity = '0';
+      resize();
+      running = true;
+      requestAnimationFrame(frame);
+      requestAnimationFrame(analyse);
+    } catch (err) {
+      hint.textContent = 'Microphone access was declined — allow it and reload to play. (The concept still reads below.)';
+      hint.style.opacity = '1';
+      beginBtn.textContent = 'Microphone blocked';
+      beginBtn.disabled = true;
+    }
+  }
+
+  // autocorrelation pitch detection (good enough for voice)
+  function detectPitch(b, sampleRate) {
+    let size = b.length, rms = 0;
+    for (let i = 0; i < size; i++) rms += b[i] * b[i];
+    rms = Math.sqrt(rms / size);
+    if (rms < 0.008) return { freq: -1, rms };
+
+    let r1 = 0, r2 = size - 1, thres = 0.2;
+    for (let i = 0; i < size / 2; i++) if (Math.abs(b[i]) < thres) { r1 = i; break; }
+    for (let i = 1; i < size / 2; i++) if (Math.abs(b[size - i]) < thres) { r2 = size - i; break; }
+    const c = b.slice(r1, r2);
+    const cs = c.length;
+    const corr = new Array(cs).fill(0);
+    for (let i = 0; i < cs; i++)
+      for (let j = 0; j < cs - i; j++) corr[i] += c[j] * c[j + i];
+
+    let d = 0; while (d < cs - 1 && corr[d] > corr[d + 1]) d++;
+    let maxv = -1, maxp = -1;
+    for (let i = d; i < cs; i++) if (corr[i] > maxv) { maxv = corr[i]; maxp = i; }
+    if (maxp <= 0) return { freq: -1, rms };
+    return { freq: sampleRate / maxp, rms };
+  }
+
+  function noteName(freq) {
+    if (freq <= 0) return '—';
+    const names = ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+    const n = Math.round(12 * Math.log2(freq / 440) + 69);
+    return names[((n % 12) + 12) % 12] + (Math.floor(n / 12) - 1);
+  }
+
+  function analyse() {
+    if (!running) return;
+    analyser.getFloatTimeDomainData(buf);
+    const { freq, rms } = detectPitch(buf, audioCtx.sampleRate);
+
+    // level (loudness) → speed; smoothed
+    const targetLevel = Math.min(1, rms * 6);
+    level += (targetLevel - level) * 0.2;
+    const targetSpeed = level * 0.34;
+    speed += (targetSpeed - speed) * 0.1;
+
+    // pitch → hue (map ~80–800 Hz across the wheel); smoothed
+    if (freq > 0) {
+      const norm = Math.min(1, Math.max(0, (Math.log2(freq) - Math.log2(80)) / (Math.log2(800) - Math.log2(80))));
+      const targetHue = norm * 320;
+      let dh = targetHue - hue;
+      hue += dh * 0.15;
+      rPitch.textContent = noteName(freq);
+    }
+    rLevel.textContent = Math.round(level * 100) + '%';
+
+    requestAnimationFrame(analyse);
+  }
+
+  beginBtn.addEventListener('click', begin);
+  idleFrame();
+})();
+</script>
+</body>
+</html>
