@@ -5,50 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Koan Epoch &mdash; Aesthetico Limited</title>
   <meta name="description" content="The Koan Epoch: a voice-driven story in development by Aesthetico Limited." />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --ink: #0a0a0a; --paper: #fafafa; --dim: #8a8a8a; --rule: #dcdcdc;
-      --serif: 'Baskerville', 'Libre Baskerville', 'Georgia', serif;
-      --mono: 'Courier New', 'Courier', monospace;
-      --heavy: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
-    }
-    body { background: var(--paper); color: var(--ink); font-family: var(--serif); padding: 3rem 2rem; max-width: 1040px; margin: 0 auto; }
-    a { color: inherit; }
-    .label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); }
-    .label a { text-decoration: none; }
-    .label a:hover { color: var(--ink); }
-
-    header { display: flex; justify-content: space-between; align-items: baseline; gap: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--ink); margin-bottom: 3rem; }
-    .brand { font-family: var(--heavy); font-weight: 900; font-size: 1rem; letter-spacing: -0.01em; text-decoration: none; }
-
-    h1 { font-family: var(--heavy); font-weight: 900; font-size: clamp(2.4rem, 8vw, 4.6rem); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
-    .lede { font-size: 1.15rem; line-height: 1.65; max-width: 560px; margin-bottom: 3rem; }
-
-    figure { margin: 0; }
-    figure img { display: block; width: 100%; height: auto; background: #eee; }
-    figcaption { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); padding-top: 0.5rem; }
-
-    .hero { margin-bottom: 3.5rem; }
-
-    h2 { font-family: var(--heavy); font-weight: 900; font-size: 1rem; letter-spacing: -0.01em; padding-bottom: 0.6rem; border-bottom: 1px solid var(--ink); margin-bottom: 1.5rem; }
-
-    .copy p { font-size: 1.05rem; line-height: 1.7; max-width: 560px; margin-bottom: 1rem; }
-    .copy { margin: 3rem 0; }
-    .status { margin-bottom: 3rem; }
-    .doors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 3rem; }
-
-    .closing { margin-bottom: 3rem; }
-
-    footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 2px solid var(--ink); display: flex; justify-content: space-between; gap: 1rem; }
-
-    @media (max-width: 640px) {
-      body { padding: 2rem 1.25rem; }
-      .grid, .grid.two { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-      .doors { grid-template-columns: 1fr 1fr; }
-      footer { flex-direction: column; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/site.css" />
 </head>
 <body>
 
@@ -57,7 +14,7 @@
     <span class="label"><a href="index.html">&larr; Index</a></span>
   </header>
 
-  <h1>The Koan<br>Epoch</h1>
+  <h1>The Koan Epoch</h1>
   <p class="lede">You wake on a train you don't remember boarding. Where it takes you depends on who you turn out to be.</p>
   <p class="label status">Voice game &middot; In development</p>
 

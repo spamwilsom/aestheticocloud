@@ -4,37 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy &mdash; aesthetico.cloud</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --ink: #0a0a0a; --paper: #fafafa; --dim: #999; --rule: #e0e0e0; }
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: 'Baskerville', 'Libre Baskerville', 'Georgia', serif;
-      padding: 4rem 2rem;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    .eyebrow, .updated, footer {
-      font-family: 'Courier New', 'Courier', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dim);
-    }
-    .eyebrow a { color: inherit; text-decoration: none; }
-    .eyebrow a:hover { color: var(--ink); }
-    h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: normal; letter-spacing: -0.02em; margin: 1.25rem 0 0.75rem; }
-    h2 { font-size: 1rem; font-weight: normal; letter-spacing: 0.01em; margin: 2.25rem 0 0.6rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
-    p { font-size: 0.95rem; line-height: 1.7; max-width: 560px; margin-bottom: 0.9rem; }
-    a { color: inherit; text-underline-offset: 3px; }
-    footer { margin-top: 4rem; }
-  </style>
+  <link rel="stylesheet" href="assets/site.css" />
 </head>
 <body>
-  <p class="eyebrow"><a href="index.html">&larr; aesthetico.cloud</a></p>
+  <header>
+    <a class="brand" href="index.html">Aesthetico Limited</a>
+    <span class="label"><a href="index.html">&larr; Index</a></span>
+  </header>
   <h1>Privacy</h1>
-  <p class="updated">Last updated October 15, 2026</p>
+  <p class="label status">Last updated October 15, 2026</p>
 
   <h2>Who we are</h2>
   <p>This site is operated by Aesthetico Limited, an Ontario, Canada corporation. Contact: <a href="mailto:admin@aesthetico.cloud">admin@aesthetico.cloud</a>.</p>
@@ -52,6 +30,6 @@
   <h2>Changes</h2>
   <p>If this changes, for example because we add an app or an account system, we will update this page and its date.</p>
 
-  <footer>&copy; 2026 Aesthetico Limited &middot; Ontario, Canada</footer>
+  <footer class="label"><span>&copy; 2026 Aesthetico Limited &middot; Ontario, Canada</span></footer>
 </body>
 </html>

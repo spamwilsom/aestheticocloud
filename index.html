@@ -5,157 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aesthetico Limited</title>
   <meta name="description" content="Aesthetico Limited is an Ontario corporation developing art, design and software." />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --ink: #0a0a0a;
-      --paper: #fafafa;
-      --dim: #8a8a8a;
-      --rule: #dcdcdc;
-      --accent: #6b1a1a;
-      --serif: 'Baskerville', 'Libre Baskerville', 'Georgia', serif;
-      --mono: 'Courier New', 'Courier', monospace;
-      --heavy: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
-    }
-
-    html { font-size: 16px; }
-
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--serif);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 3rem 2rem 3rem;
-      max-width: 880px;
-      margin: 0 auto;
-    }
-
-    a { color: inherit; }
-
-    .label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dim);
-    }
-
-    /* header: wordmark left, meta right */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 2px solid var(--ink);
-      margin-bottom: 3.5rem;
-    }
-
-    .wordmark {
-      font-family: var(--heavy);
-      font-weight: 900;
-      font-size: clamp(2rem, 7vw, 3.6rem);
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-    }
-
-    .meta { text-align: right; line-height: 1.9; padding-top: 0.35rem; }
-    .meta a { text-decoration: none; }
-    .meta a:hover { color: var(--ink); }
-
-    /* about */
-    .about {
-      display: grid;
-      grid-template-columns: 9rem 1fr;
-      gap: 1rem 2rem;
-      margin-bottom: 4rem;
-    }
-
-    .about p.body { font-size: 1.05rem; line-height: 1.7; max-width: 540px; }
-    .about p.body + p.body { margin-top: 0.9rem; }
-
-    /* index */
-    main { flex: 1; }
-
-    .group { margin-bottom: 3rem; }
-
-    .group-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--ink);
-    }
-
-    .group-head h2 {
-      font-family: var(--heavy);
-      font-weight: 900;
-      font-size: 1rem;
-      letter-spacing: -0.01em;
-    }
-
-    .entries { list-style: none; }
-
-    .entries li { border-bottom: 1px solid var(--rule); }
-
-    .entry {
-      display: grid;
-      grid-template-columns: 2.5rem 1fr auto;
-      gap: 0.25rem 1.25rem;
-      align-items: baseline;
-      padding: 1.15rem 0;
-      text-decoration: none;
-      color: var(--ink);
-    }
-
-    a.entry:hover .t { color: var(--accent); }
-    a.entry:hover .num { color: var(--ink); }
-
-    .num { font-family: var(--mono); font-size: 0.7rem; color: var(--dim); }
-    .t { font-size: 1.15rem; letter-spacing: 0.005em; transition: color 0.15s ease; }
-    .kind { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); text-align: right; }
-    .pitch { grid-column: 2 / 3; font-size: 0.9rem; line-height: 1.55; color: var(--dim); font-style: italic; max-width: 480px; }
-
-    /* footer */
-    footer {
-      margin-top: 3rem;
-      padding-top: 1.25rem;
-      border-top: 2px solid var(--ink);
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    footer a { text-decoration: none; }
-    footer a:hover { color: var(--ink); }
-
-    @media (max-width: 560px) {
-      body { padding: 2rem 1.25rem; }
-      header { flex-direction: column; gap: 1rem; }
-      .meta { text-align: left; padding-top: 0; }
-      .about { grid-template-columns: 1fr; }
-      .entry { grid-template-columns: 2rem 1fr; }
-      .kind { grid-column: 2 / 3; text-align: left; }
-      footer { flex-direction: column; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/site.css" />
+  <style>header h1.wordmark { font-size: clamp(1.9rem, 5.5vw, 2.5rem); font-weight: 600; letter-spacing: -0.02em; margin: 0; }</style>
 </head>
 <body>
 
   <header>
-    <h1 class="wordmark">Aesthetico<br>Limited</h1>
-    <p class="label meta">
-      Ontario, Canada<br>
-      Art &middot; Design &middot; Software<br>
-      <a href="mailto:admin@aesthetico.cloud">admin@aesthetico.cloud</a>
-    </p>
+    <h1 class="wordmark">Aesthetico Limited</h1>
+    <p class="meta"><a href="mailto:admin@aesthetico.cloud">admin@aesthetico.cloud</a></p>
   </header>
 
   <section class="about" id="about">
-    <p class="label">About</p>
     <div>
       <p class="body">Aesthetico Limited is an Ontario corporation developing art, design and software. Its work runs from hand-painted garments and installations to apps in development.</p>
       <p class="body">This page indexes current projects. Each is carried from concept toward something tangible.</p>

@@ -5,205 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Spin Music Sound — Aesthetico Limited</title>
 <meta name="description" content="A two-minute synesthetic performance. Your voice becomes motion, becomes colour, becomes a thing you carry home." />
+<link rel="stylesheet" href="assets/site.css" />
 <style>
-  :root {
-    --ink: #111111;
-    --paper: #fcfcfa;
-    --muted: #8a8a85;
-    --rule: #e4e4df;
-    --serif: "Baskerville", "Libre Baskerville", "Georgia", "Times New Roman", serif;
-    --mono: "SF Mono", "JetBrains Mono", "Menlo", "Consolas", monospace;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--serif);
-    line-height: 1.7;
-  }
-
-  .wrap {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: clamp(2rem, 7vw, 6rem) clamp(1.6rem, 6vw, 3rem) 6rem;
-  }
-
-  /* ---- nav back ---- */
-  .back {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: clamp(3rem, 9vh, 6rem);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease, color 0.3s ease;
-  }
-  .back:hover { color: var(--ink); border-color: var(--ink); }
-  .back::before { content: "← "; }
-
-  /* ---- masthead ---- */
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1.6rem;
-  }
-  h1.mark {
-    font-size: clamp(2.6rem, 8vw, 5rem);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.02;
-    margin-bottom: 1.6rem;
-  }
-  .lede {
-    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
-    font-style: italic;
-    color: #333;
-    max-width: 30ch;
-    margin-bottom: clamp(3rem, 9vh, 5.5rem);
-  }
-
-  /* ---- the instrument (interactive) ---- */
-  .instrument {
-    margin: 0 0 clamp(3rem, 9vh, 5.5rem);
-    border: 1px solid var(--rule);
-    background: #fff;
-    position: relative;
-    overflow: hidden;
-  }
-  .stage {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    display: block;
-  }
+  .eyebrow { margin-bottom: 0.5rem; }
+  .instrument { margin: 2rem 0 3rem; border: 1px solid var(--rule); border-radius: 3px; background: #fff; position: relative; overflow: hidden; }
+  .stage { position: relative; width: 100%; aspect-ratio: 16 / 10; display: block; }
   canvas { display: block; width: 100%; height: 100%; }
-
-  .controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 1.2rem;
-    border-top: 1px solid var(--rule);
-    flex-wrap: wrap;
-  }
-  .controls .label {
-    font-family: var(--mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  button.begin {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    background: var(--ink);
-    color: var(--paper);
-    border: none;
-    padding: 0.7rem 1.4rem;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-  }
-  button.begin:hover { opacity: 0.8; }
+  .controls { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.85rem 1rem; border-top: 1px solid var(--rule); flex-wrap: wrap; }
+  button.begin { font-family: var(--sans); font-size: 0.875rem; font-weight: 600; background: var(--ink); color: var(--paper); border: 0; border-radius: 3px; padding: 0.55rem 1.1rem; cursor: pointer; }
+  button.begin:hover { opacity: 0.85; }
   button.begin[disabled] { opacity: 0.35; cursor: default; }
-
-  .readout {
-    font-family: var(--mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    display: flex;
-    gap: 1.4rem;
-  }
-  .readout b { color: var(--ink); font-weight: 400; }
-
-  .hint {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    font-style: italic;
-    color: var(--muted);
-    pointer-events: none;
-    transition: opacity 0.6s ease;
-  }
-
-  /* ---- editorial ---- */
-  section { margin-bottom: clamp(2.6rem, 7vh, 4rem); }
-  h2 {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1.2rem;
-    padding-top: 1.2rem;
-    border-top: 1px solid var(--rule);
-  }
-  p { font-size: clamp(1.02rem, 1.6vw, 1.15rem); margin-bottom: 1.1rem; max-width: 64ch; }
+  .readout { font-size: 0.8125rem; color: var(--dim); display: flex; gap: 1.25rem; }
+  .readout b { color: var(--ink); font-weight: 600; }
+  .hint { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; color: var(--dim); pointer-events: none; transition: opacity 0.6s ease; }
+  section { margin-bottom: 0.5rem; }
   p .em { font-style: italic; }
-  ul.spec { list-style: none; max-width: 64ch; }
-  ul.spec li {
-    padding: 0.7rem 0;
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    gap: 1rem;
-    align-items: baseline;
-  }
-  ul.spec li .k {
-    font-family: var(--mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    min-width: 9rem;
-    flex-shrink: 0;
-  }
-
-  footer {
-    margin-top: clamp(4rem, 12vh, 7rem);
-    padding-top: 1.4rem;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    font-family: var(--mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-  }
-  footer a { color: var(--muted); text-decoration: none; }
-  footer a:hover { color: var(--ink); }
-
-  @media (max-width: 540px) {
-    .readout { display: none; }
-  }
+  ul.spec { list-style: none; max-width: 40rem; margin-top: 0.5rem; }
+  ul.spec li { padding: 0.65rem 0; border-bottom: 1px solid var(--rule); display: flex; gap: 1rem; align-items: baseline; }
+  ul.spec li:first-child { border-top: 1px solid var(--rule); }
+  ul.spec li .k { font-size: 0.8125rem; color: var(--dim); min-width: 9rem; flex-shrink: 0; }
+  @media (max-width: 540px) { .readout { display: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <a class="back" href="/">Aesthetico Limited</a>
+  <header>
+    <a class="brand" href="index.html">Aesthetico Limited</a>
+    <span class="label"><a href="index.html">&larr; Index</a></span>
+  </header>
 
-  <p class="eyebrow">Concept 01 &nbsp;/&nbsp; Performance &middot; Installation</p>
-  <h1 class="mark">Spin Music<br>Sound</h1>
+  <h1 class="mark">Spin Music Sound</h1>
   <p class="lede">Your voice becomes motion, becomes colour, becomes a thing you carry home.</p>
+  <p class="label status">Installation &middot; Wearable &middot; Concept</p>
 
   <!-- ---- THE INSTRUMENT ---- -->
   <div class="instrument">
@@ -254,9 +88,9 @@
     <p>Confirm the pitch-to-hue and loudness-to-speed mappings. Sketch the spinning-funnel delivery. Identify the cheapest viable rig for a proof-of-concept spin-and-paint test. Gather visual references.</p>
   </section>
 
-  <footer>
-    <span>Spin Music Sound &mdash; concept, pre-prototype</span>
-    <a href="/">← back to index</a>
+  <footer class="label">
+    <span>&copy; 2026 Aesthetico Limited &middot; Ontario, Canada</span>
+    <span><a href="privacy.html">Privacy</a> &middot; All rights reserved</span>
   </footer>
 
 </div>
@@ -315,7 +149,7 @@
   function frame() {
     if (!running) return;
     // fade prior frame slightly to let strokes accumulate then soften
-    ctx.fillStyle = 'rgba(252,252,250,0.06)';
+    ctx.fillStyle = 'rgba(255,255,255,0.06)';
     ctx.fillRect(0, 0, W, H);
 
     // advance rotation by smoothed speed

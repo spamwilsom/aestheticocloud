@@ -4,276 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Sound & Light Room — Aesthetico Limited</title>
+  <link rel="stylesheet" href="../assets/site.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --ink: #0a0a0a;
-      --paper: #fafafa;
-      --dim: #999;
-      --rule: #e0e0e0;
-      --accent: #0a0a0a;
-    }
-
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: 'Baskerville', 'Libre Baskerville', 'Georgia', serif;
-      min-height: 100vh;
-      padding: 4rem 2rem;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .back {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--dim);
-      text-decoration: none;
-      margin-bottom: 4rem;
-      transition: color 0.15s;
-    }
-    .back:hover { color: var(--ink); }
-
-    header { margin-bottom: 4rem; }
-
-    .eyebrow {
-      font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 1.25rem;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 6vw, 2.8rem);
-      font-weight: normal;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
-    .lede {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: #333;
-      max-width: 580px;
-      font-style: italic;
-    }
-
-    /* Status badge */
-    .status-row {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin: 2.5rem 0;
-      flex-wrap: wrap;
-    }
-    .badge {
-      font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.7rem;
-      border: 1px solid var(--ink);
-      color: var(--ink);
-    }
-    .badge.open { background: var(--ink); color: var(--paper); }
-
-    hr {
-      border: none;
-      border-top: 1px solid var(--rule);
-      margin: 3rem 0;
-    }
-
-    section { margin-bottom: 3rem; }
-
-    .section-label {
-      font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 1.25rem;
-    }
-
-    h2 {
-      font-size: 1.2rem;
-      font-weight: normal;
-      letter-spacing: -0.01em;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 0.95rem;
-      line-height: 1.75;
-      color: #222;
-      margin-bottom: 1rem;
-    }
-
-    p:last-child { margin-bottom: 0; }
-
-    /* Spec table */
-    .spec-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    .spec-table tr { border-bottom: 1px solid var(--rule); }
-    .spec-table tr:first-child { border-top: 1px solid var(--rule); }
-    .spec-table td {
-      padding: 0.85rem 0;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      vertical-align: top;
-    }
-    .spec-table td:first-child {
-      font-family: 'Courier New', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--dim);
-      width: 30%;
-      padding-right: 1.5rem;
-    }
-
-    /* Version cards */
-    .versions {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-    .version-card {
-      border: 1px solid var(--rule);
-      padding: 1.25rem;
-    }
-    .version-card.recommended {
-      border-color: var(--ink);
-    }
-    .version-label {
-      font-family: 'Courier New', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 0.5rem;
-    }
-    .version-label.rec { color: var(--ink); }
-    .version-title {
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-      font-style: italic;
-    }
-    .version-budget {
-      font-family: 'Courier New', monospace;
-      font-size: 0.75rem;
-      color: var(--dim);
-      margin-bottom: 0.75rem;
-    }
-    .version-notes {
-      font-size: 0.8rem;
-      line-height: 1.6;
-      color: #444;
-    }
-
-    /* Collaborator section */
-    .collab-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border-top: 1px solid var(--rule);
-      margin-top: 1rem;
-    }
-    .collab-item {
-      padding: 0.85rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-    .collab-item:nth-child(odd) { padding-right: 1.5rem; }
-    .collab-role {
-      font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 0.2rem;
-    }
-
-    /* CTA */
-    .cta-block {
-      border: 1px solid var(--ink);
-      padding: 2rem;
-      margin-top: 2rem;
-    }
-    .cta-block p {
-      font-style: italic;
-      margin-bottom: 1.25rem;
-    }
-    .cta-links {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .cta-link {
-      font-family: 'Courier New', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1px solid var(--ink);
-      padding-bottom: 0.1rem;
-      transition: opacity 0.15s;
-    }
-    .cta-link:hover { opacity: 0.4; }
-
-    footer {
-      margin-top: 5rem;
-      display: flex;
-      justify-content: space-between;
-      font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      color: var(--dim);
-    }
-
-    @media (max-width: 560px) {
-      .versions { grid-template-columns: 1fr; }
-      .collab-grid { grid-template-columns: 1fr; }
-      .collab-item:nth-child(odd) { padding-right: 0; }
-      footer { flex-direction: column; gap: 0.5rem; }
-    }
+  h1 { margin-bottom: 0.9rem; }
+  .badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1.25rem 0 0; }
+  .badge { font-size: 0.8125rem; padding: 0.2rem 0.65rem; border: 1px solid var(--rule); border-radius: 999px; color: var(--dim); }
+  .badge.open { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.75rem 0 0; }
+  section { margin-bottom: 0; }
+  .section-label { font-weight: 600; font-size: 1.0625rem; color: var(--ink); letter-spacing: -0.005em; margin: 2.25rem 0 1rem; }
+  p:last-child { margin-bottom: 0; }
+  .spec-table { width: 100%; border-collapse: collapse; margin-top: 0.25rem; }
+  .spec-table tr { border-bottom: 1px solid var(--rule); }
+  .spec-table tr:first-child { border-top: 1px solid var(--rule); }
+  .spec-table td { padding: 0.8rem 0; font-size: 0.9375rem; line-height: 1.6; vertical-align: top; }
+  .spec-table td:first-child { font-size: 0.8125rem; color: var(--dim); width: 26%; padding-right: 1.25rem; }
+  .versions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.25rem; }
+  .version-card { border: 1px solid var(--rule); border-radius: 3px; padding: 1.1rem; }
+  .version-card.recommended { border-color: var(--ink); }
+  .version-label { font-size: 0.8125rem; color: var(--dim); margin-bottom: 0.4rem; }
+  .version-label.rec { color: var(--ink); font-weight: 600; }
+  .version-title { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .version-budget { font-size: 0.8125rem; color: var(--dim); margin-bottom: 0.6rem; }
+  .version-notes { font-size: 0.875rem; line-height: 1.6; color: #444; }
+  .collab-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); margin-top: 0.25rem; }
+  .collab-item { padding: 0.8rem 0; border-bottom: 1px solid var(--rule); font-size: 0.9375rem; line-height: 1.5; }
+  .collab-item:nth-child(odd) { padding-right: 1.25rem; }
+  .collab-role { font-size: 0.8125rem; color: var(--dim); margin-bottom: 0.15rem; }
+  .cta-block { background: var(--soft); border-radius: 3px; padding: 1.5rem; margin-top: 1.75rem; }
+  .cta-block p { margin-bottom: 0.75rem; }
+  .cta-link { font-weight: 600; color: var(--ink); }
+  @media (max-width: 600px) { .versions, .collab-grid { grid-template-columns: 1fr; } .collab-item:nth-child(odd) { padding-right: 0; } }
   </style>
 </head>
 <body>
 
-  <a class="back" href="../index.html">&#8592; &nbsp; Aesthetico Limited</a>
-
   <header>
-    <p class="eyebrow">07 &nbsp;/&nbsp; Installation &middot; Open Project</p>
-    <h1>The Sound<br>&amp; Light Room</h1>
+    <a class="brand" href="../index.html">Aesthetico Limited</a>
+    <span class="label"><a href="../index.html">&larr; Index</a></span>
+  </header>
+
+  <div>
+    <h1>The Sound &amp; Light Room</h1>
     <p class="lede">An adaptive light environment that translates crowd sound dynamics into luminous feedback — a living mirror of collective behavior.</p>
 
-    <div class="status-row">
+    <div class="badges">
       <span class="badge open">Open to Collaborators</span>
       <span class="badge">Concept &amp; Research Phase</span>
     </div>
-  </header>
+  </div>
 
   <hr>
 
   <section>
     <p class="section-label">Concept</p>
-    <p>This installation creates an immersive light environment that responds in real-time to the acoustic presence of people in a space. Distributed sound sensors translate the volume and spatial dis[...]
-    <p>As visitors move through the space, their collective vocal energy — conversations, laughter, shouts, silence — becomes visible as shifting zones of brightness. Periodically and without anno[...]
+    <p>This installation creates an immersive light environment that responds in real-time to the acoustic presence of people in a space.</p>
+    <p>As visitors move through the space, their collective vocal energy — conversations, laughter, shouts, silence — becomes visible as shifting zones of brightness.</p>
     <p>The installation asks: at what point does a group of individuals become a collective entity? When does crowd behavior emerge as something beyond the sum of its parts?</p>
   </section>
 
@@ -288,7 +74,7 @@
       </tr>
       <tr>
         <td>Processing</td>
-        <td>Microcontroller translates audio data into lighting control signals. Volume → brightness at MVP. Pitch → colour at scale. Inversion logic runs on a randomized timer to prevent predicta[...]
+        <td>Microcontroller translates audio data into lighting control signals. Volume → brightness at MVP. Pitch → colour at scale.</td>
       </tr>
       <tr>
         <td>Lighting</td>
@@ -296,7 +82,7 @@
       </tr>
       <tr>
         <td>Space</td>
-        <td>Rectangular corridor or room, minimum 20&prime;&nbsp;&times;&nbsp;40&prime;, 10&ndash;12ft ceilings. Flow-through design (separate entry/exit) to prevent bottlenecking. Dimmable ambient pr[...]
+        <td>Rectangular corridor or room, minimum 20&prime;&nbsp;&times;&nbsp;40&prime;, 10&ndash;12ft ceilings. Flow-through design (separate entry/exit) to prevent bottlenecking.</td>
       </tr>
       <tr>
         <td>Power</td>
@@ -318,19 +104,19 @@
         <div class="version-label">Minimal</div>
         <div class="version-title">Single-zone volume loop</div>
         <div class="version-budget">~$1,500 CAD</div>
-        <div class="version-notes">One enclosed space, 4–6 mics averaged to a single reading. Brightness scales with volume. Basic temporary walls, standard LED on dimmer. Proves the core concept.</[...]
+        <div class="version-notes">One enclosed space, 4–6 mics averaged to a single reading. Brightness scales with volume. Basic temporary walls, standard LED on dimmer. Proves the core concept.</div>
       </div>
       <div class="version-card recommended">
         <div class="version-label rec">Recommended</div>
         <div class="version-title">Two-zone scalable MVP</div>
         <div class="version-budget">~$5,000–8,000 CAD</div>
-        <div class="version-notes">Primary space + transitional entry. 6–10 mics for basic spatial differentiation. Modular rig designed to scale with sponsorship. Rock-solid reliability over comple[...]
+        <div class="version-notes">Primary space + transitional entry. 6–10 mics for basic spatial differentiation. Modular rig designed to scale with sponsorship.</div>
       </div>
       <div class="version-card">
         <div class="version-label">Ideal</div>
         <div class="version-title">Multi-zone pitch-responsive</div>
         <div class="version-budget">~$15,000+ CAD</div>
-        <div class="version-notes">Multiple interconnected chambers, pitch-to-colour mapping, moving heads, near-total acoustic isolation. Turrell-quality atmospheric light. Real-time data visualizati[...]
+        <div class="version-notes">Multiple interconnected chambers, pitch-to-colour mapping, moving heads, near-total acoustic isolation. Turrell-quality atmospheric light.</div>
       </div>
     </div>
   </section>
@@ -339,8 +125,8 @@
 
   <section>
     <p class="section-label">Themes</p>
-    <p>Collective self-awareness &nbsp;&middot;&nbsp; Emergence and crowd dynamics &nbsp;&middot;&nbsp; The individual vs. the collective &nbsp;&middot;&nbsp; Technology as mirror &nbsp;&middot;&nbsp;[...]
-    <p style="margin-top:1rem; color: var(--dim); font-style: italic; font-size:0.9rem;">Influences: James Turrell, Olafur Eliasson (Weather Project), participatory installation art, data visualizatio[...]
+    <p>Collective self-awareness &nbsp;&middot;&nbsp; Emergence and crowd dynamics &nbsp;&middot;&nbsp; The individual vs. the collective &nbsp;&middot;&nbsp; Technology as mirror </p>
+    <p style="margin-top:1rem; color: var(--dim); font-style: italic; font-size:0.9rem;">Influences: James Turrell, Olafur Eliasson (Weather Project), participatory installation art.</p>
   </section>
 
   <hr>
@@ -391,9 +177,9 @@
     </div>
   </section>
 
-  <footer>
-    <span>Aesthetico Limited &nbsp;&mdash;&nbsp; The Sound &amp; Light Room</span>
-    <span>&copy; 2026 Aesthetico Limited &middot; All rights reserved</span>
+  <footer class="label">
+    <span>&copy; 2026 Aesthetico Limited &middot; Ontario, Canada</span>
+    <span><a href="../privacy.html">Privacy</a> &middot; All rights reserved</span>
   </footer>
 
 </body>
