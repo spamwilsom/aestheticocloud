@@ -110,7 +110,7 @@ Open `code/web-demo/index.html` in Chrome/Firefox. Allow microphone access. The 
 
 ## Contributing
 
-This project is **CC0 — Public Domain**. Fork it, build it, adapt it to your space.
+To collaborate on a version of this project, contact admin@aesthetico.cloud.
 
 ### Open roles
 
@@ -121,7 +121,7 @@ This project is **CC0 — Public Domain**. Fork it, build it, adapt it to your s
 - Fabricator / carpenter (temporary structures)
 - Documentation (photo / video)
 
-Pull requests welcome. If you're building a version of this, open an issue and document it — we'd love to know where this ends up.
+If you're building a version of this, get in touch. We'd love to know where this ends up.
 
 -----
 
@@ -137,9 +137,7 @@ Pull requests welcome. If you're building a version of this, open an issue and d
 
 ## License
 
-**CC0 1.0 Universal — Public Domain Dedication**
-
-No rights reserved. Use freely, without attribution, for any purpose.
+Copyright (c) 2026 Aesthetico Limited. All rights reserved.
 
 [Full license →](../LICENSE)
 

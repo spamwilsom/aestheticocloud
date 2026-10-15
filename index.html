@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aesthetico.cloud</title>
+  <title>Aesthetico Limited</title>
+  <meta name="description" content="Aesthetico Limited is an Ontario corporation developing art, design and software." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --ink: #0a0a0a;
       --paper: #fafafa;
-      --dim: #999;
-      --rule: #e0e0e0;
+      --dim: #8a8a8a;
+      --rule: #dcdcdc;
+      --accent: #6b1a1a;
+      --serif: 'Baskerville', 'Libre Baskerville', 'Georgia', serif;
+      --mono: 'Courier New', 'Courier', monospace;
+      --heavy: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
     }
 
     html { font-size: 16px; }
@@ -19,183 +24,207 @@
     body {
       background: var(--paper);
       color: var(--ink);
-      font-family: 'Baskerville', 'Libre Baskerville', 'Georgia', serif;
+      font-family: var(--serif);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      padding: 4rem 2rem;
-      max-width: 720px;
+      padding: 3rem 2rem 3rem;
+      max-width: 880px;
       margin: 0 auto;
     }
 
+    a { color: inherit; }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* header: wordmark left, meta right */
     header {
-      margin-bottom: 5rem;
-    }
-
-    .eyebrow {
-      font-family: 'Courier New', 'Courier', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 1.25rem;
-    }
-
-    .mark {
-      font-size: clamp(2rem, 6vw, 3rem);
-      font-weight: normal;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 1.5rem;
-    }
-
-    .dim { color: var(--dim); }
-
-    .tagline {
-      font-size: 0.95rem;
-      color: var(--dim);
-      line-height: 1.6;
-      max-width: 480px;
-      font-style: italic;
-    }
-
-    main { flex: 1; }
-
-    .index-label {
-      font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 1.5rem;
-    }
-
-    .concepts {
-      list-style: none;
-      border-top: 1px solid var(--rule);
-    }
-
-    .concepts li {
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .concepts a {
-      display: flex;
-      align-items: baseline;
-      gap: 1.5rem;
-      padding: 1.1rem 0;
-      text-decoration: none;
-      color: var(--ink);
-      transition: color 0.15s ease;
-    }
-
-    .concepts a:hover { color: var(--dim); }
-    .concepts a:hover .num { color: var(--ink); }
-
-    .num {
-      font-family: 'Courier New', monospace;
-      font-size: 0.7rem;
-      color: var(--dim);
-      min-width: 2rem;
-      transition: color 0.15s ease;
-    }
-
-    .title {
-      flex: 1;
-      font-size: 1rem;
-      letter-spacing: 0.01em;
-    }
-
-    .kind {
-      font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--dim);
-    }
-
-    footer {
-      margin-top: 5rem;
       display: flex;
       justify-content: space-between;
-      font-family: 'Courier New', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      color: var(--dim);
+      align-items: flex-start;
+      gap: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 3.5rem;
     }
 
-    @media (max-width: 480px) {
-      .kind { display: none; }
-      footer { flex-direction: column; gap: 0.5rem; }
+    .wordmark {
+      font-family: var(--heavy);
+      font-weight: 900;
+      font-size: clamp(2rem, 7vw, 3.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+
+    .meta { text-align: right; line-height: 1.9; padding-top: 0.35rem; }
+    .meta a { text-decoration: none; }
+    .meta a:hover { color: var(--ink); }
+
+    /* about */
+    .about {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 1rem 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .about p.body { font-size: 1.05rem; line-height: 1.7; max-width: 540px; }
+    .about p.body + p.body { margin-top: 0.9rem; }
+
+    /* index */
+    main { flex: 1; }
+
+    .group { margin-bottom: 3rem; }
+
+    .group-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .group-head h2 {
+      font-family: var(--heavy);
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .entries { list-style: none; }
+
+    .entries li { border-bottom: 1px solid var(--rule); }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr auto;
+      gap: 0.25rem 1.25rem;
+      align-items: baseline;
+      padding: 1.15rem 0;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    a.entry:hover .t { color: var(--accent); }
+    a.entry:hover .num { color: var(--ink); }
+
+    .num { font-family: var(--mono); font-size: 0.7rem; color: var(--dim); }
+    .t { font-size: 1.15rem; letter-spacing: 0.005em; transition: color 0.15s ease; }
+    .kind { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); text-align: right; }
+    .pitch { grid-column: 2 / 3; font-size: 0.9rem; line-height: 1.55; color: var(--dim); font-style: italic; max-width: 480px; }
+
+    /* footer */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 2px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 560px) {
+      body { padding: 2rem 1.25rem; }
+      header { flex-direction: column; gap: 1rem; }
+      .meta { text-align: left; padding-top: 0; }
+      .about { grid-template-columns: 1fr; }
+      .entry { grid-template-columns: 2rem 1fr; }
+      .kind { grid-column: 2 / 3; text-align: left; }
+      footer { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <p class="eyebrow">Repository &nbsp;/&nbsp; Concepts in Progress</p>
-    <h1 class="mark">aesthetico<span class="dim">.cloud</span></h1>
-    <p class="tagline">A housing for aesthetically-driven, novel concepts &mdash; and the quiet work of carrying them toward tangibility.</p>
+    <h1 class="wordmark">Aesthetico<br>Limited</h1>
+    <p class="label meta">
+      Ontario, Canada<br>
+      Art &middot; Design &middot; Software<br>
+      <a href="mailto:admin@aesthetico.cloud">admin@aesthetico.cloud</a>
+    </p>
   </header>
 
+  <section class="about" id="about">
+    <p class="label">About</p>
+    <div>
+      <p class="body">Aesthetico Limited is an Ontario corporation developing art, design and software. Its work runs from hand-painted garments and installations to apps in development.</p>
+      <p class="body">This page indexes current projects. Each is carried from concept toward something tangible.</p>
+    </div>
+  </section>
+
   <main>
-    <p class="index-label">Index</p>
-    <ol class="concepts">
-      <li>
-        <a href="spin-music-sound.html">
-          <span class="num">01</span>
-          <span class="title">Spin Music Sound</span>
-          <span class="kind">Installation&middot;Wearable</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span class="num">02</span>
-          <span class="title">David Crinshaw / DCAC</span>
-          <span class="kind">Fashion&middot;Art</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span class="num">03</span>
-          <span class="title">Cultural Currents</span>
-          <span class="kind">Cooperative</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span class="num">04</span>
-          <span class="title">Dilettante Eclectic Ruminations</span>
-          <span class="kind">Platform</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span class="num">05</span>
-          <span class="title">The Beach Scene</span>
-          <span class="kind">Narrative</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span class="num">06</span>
-          <span class="title">Hall of Heroes</span>
-          <span class="kind">Concept</span>
-        </a>
-      </li>
-      <li>
-        <a href="sound-light-room/index.html">
-          <span class="num">07</span>
-          <span class="title">The Sound &amp; Light Room</span>
-          <span class="kind">Installation&middot;Open</span>
-        </a>
-      </li>
-    </ol>
+    <section class="group" id="art">
+      <div class="group-head">
+        <h2>Art</h2>
+        <span class="label">Projects</span>
+      </div>
+      <ol class="entries">
+        <li>
+          <a class="entry" href="david-crinshaw.html">
+            <span class="num">01</span>
+            <span class="t">David Crinshaw</span>
+            <span class="kind">Fashion &middot; Art</span>
+            <span class="pitch">A satirical fashion-art label: hand-painted garments, canvases and installations.</span>
+          </a>
+        </li>
+        <li>
+          <a class="entry" href="spin-music-sound.html">
+            <span class="num">02</span>
+            <span class="t">Spin Music Sound</span>
+            <span class="kind">Installation &middot; Wearable</span>
+            <span class="pitch">Your voice becomes motion, becomes colour, becomes a thing you carry home.</span>
+          </a>
+        </li>
+        <li>
+          <a class="entry" href="sound-light-room/index.html">
+            <span class="num">03</span>
+            <span class="t">The Sound &amp; Light Room</span>
+            <span class="kind">Installation</span>
+            <span class="pitch">An adaptive light environment that turns crowd sound into luminous feedback.</span>
+          </a>
+        </li>
+      </ol>
+    </section>
+
+    <section class="group" id="software">
+      <div class="group-head">
+        <h2>Software &amp; Publishing</h2>
+        <span class="label">Voice games</span>
+      </div>
+      <ol class="entries">
+        <li>
+          <a class="entry" href="koan.html">
+            <span class="num">04</span>
+            <span class="t">The Koan Epoch</span>
+            <span class="kind">Voice game &middot; In development</span>
+            <span class="pitch">You wake on a train you don't remember boarding. Where it takes you depends on who you turn out to be.</span>
+          </a>
+        </li>
+        <li>
+          <a class="entry" href="passing.html">
+            <span class="num">05</span>
+            <span class="t">Passing</span>
+            <span class="kind">Voice game &middot; In development</span>
+            <span class="pitch">Pick a mask. Take the call. Find out if you pass.</span>
+          </a>
+        </li>
+      </ol>
+    </section>
   </main>
 
-  <footer>
-    <span>&copy; 2026 &mdash; aesthetico.cloud</span>
-    <span>CC0 1.0 &mdash; Public Domain</span>
+  <footer class="label">
+    <span>&copy; 2026 Aesthetico Limited &middot; Ontario, Canada</span>
+    <span><a href="privacy.html">Privacy</a> &middot; All rights reserved</span>
   </footer>
 
 </body>
